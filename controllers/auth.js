@@ -49,3 +49,30 @@ exports.signup = async (req,res)=>{
     }
 
 }
+
+
+// login controller
+exports.login = async(req,res)=>{
+    const {email,password} = req.body;
+
+    if(!email || !password){
+        return res.status(400).json({
+            success:false,
+            message:"Submit your data carefully!"
+        })
+    }
+
+    const user = await User.findOne({email});
+    if(!user){
+        return res.status(401).json({
+            success:false,
+            message:"User is not registered!Sign Up first!"
+        })
+    }
+
+    if(await bcrypt.compare(password,user.password)){
+
+    }else{
+        
+    }
+}
